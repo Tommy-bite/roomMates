@@ -31,6 +31,25 @@ const createGastoModel = async (gasto) => {
 };
 
 
+const updateGastoModel = async (id, editGasto) => {
+  try {
+    const { roommate, descripcion, monto } = editGasto;
+
+    const idRoomMate = await getRoomMateByNombre(roommate);
+    console.log("id roomate " ,idRoomMate);
+
+    const query = {
+      text: "UPDATE  gastos SET monto = $1, descripcion = $2 , idRoomMate = $3 WHERE id = $4",
+      values: [monto, descripcion, idRoomMate, id],
+    };
+
+    await pool.query(query);
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const updateGastosRoomMate = async (idRoomMate, monto) => {
   try {
     // Obtener el valor actual del campo 'debe' para el RoomMate
@@ -116,7 +135,25 @@ const getRoomMateByNombre = async (nombre) => {
   }
 };
 
+const deleteGastoModel = async (id) => {
+  try {
+
+    const query = {
+      text: "DELETE FROM gastos WHERE id = $1",
+      values: [id],
+    };
+
+    const { rows } = await pool.query(query);
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default {
   createGastoModel,
   getGastosModel,
+  deleteGastoModel,
+  updateGastoModel
 };

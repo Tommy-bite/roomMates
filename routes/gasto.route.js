@@ -7,5 +7,7 @@ const router = Router();
 
 router.get('/', gastoController.getGastosController)
 router.post('/', gastoController.createGastoController)
+router.delete('/:id', gastoController.deleteGastoController)
+router.put('/:id', gastoController.updateGastoController)
 
 export default router;
