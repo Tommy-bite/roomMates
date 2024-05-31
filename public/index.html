@@ -157,6 +157,7 @@ Articulos de limpieza</textarea
         const res = await fetch("http://localhost:3000/gastos");
         const data = await res.json();
         gastos = data.gastos;
+        console.log(gastos);
       };
 
       const imprimir = async () => {
@@ -185,7 +186,7 @@ Articulos de limpieza</textarea
           gastos.forEach((g) => {
             $("#gastosHistorial").append(`
                 <tr>
-                  <td>${g.roommate}</td>
+                  <td>${g.nombreRoommate}</td>
                   <td>${g.descripcion}</td>
                   <td>${g.monto}</td>
                   <td class="d-flex align-items-center justify-content-between">
@@ -212,13 +213,16 @@ Articulos de limpieza</textarea
         const roommateSelected = $("#roommatesSelect").val();
         const descripcion = $("#descripcion").val();
         const monto = Number($("#monto").val());
-        await fetch("http://localhost:3000/gasto", {
+        await fetch("http://localhost:3000/gastos", {
           method: "POST",
           body: JSON.stringify({
             roommate: roommateSelected,
             descripcion,
             monto,
           }),
+          headers : {
+            "Content-Type" : "application/json"
+          }
         });
         imprimir();
       };
