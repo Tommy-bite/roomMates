@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import express from 'express';
+import roommateRoute from './routes/roommate.route.js'
 
 const app = express();
 
@@ -11,6 +12,8 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
     res.send('Hola Mundo!');
 })
+
+app.use('/roommate', roommateRoute);
 
 app.get('**', (req, res) => {
     res.status(404).send('No existe la pagina consultada');
