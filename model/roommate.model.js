@@ -20,6 +20,23 @@ const createRoomMateModel = async (nombreCompleto) => {
       }
 }
 
+const getRoomMateModel = async () => {
+  try {
+
+      const query = {
+        text: "SELECT * FROM roommates ",
+      };
+
+      const { rows } = await pool.query(query);
+  
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+}
+
+
 export default {
-    createRoomMateModel
+    createRoomMateModel,
+    getRoomMateModel
 }

@@ -148,8 +148,9 @@ Articulos de limpieza</textarea
       let gastos = [];
       let gastoEditing = null;
       const getRoommates = async () => {
-        const res = await fetch("http://localhost:3000/roommates");
+        const res = await fetch("http://localhost:3000/roommate");
         const data = await res.json();
+        console.log(data.roommates);
         roommates = data.roommates;
       };
       const getGastos = async () => {

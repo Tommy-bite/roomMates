@@ -7,8 +7,6 @@ const router = Router();
 //PATH /roommate
 
 router.post('/', roommateController.createRoomMateController)
-router.get('/', (req, res) => {
-    res.json({ok : true})
-})
+router.get('/', roommateController.getRoomMateController)
 
 export default router;

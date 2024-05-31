@@ -28,7 +28,25 @@ const createRoomMateController =  async (req, res) => {
     }
 }
 
+const getRoomMateController = async (req, res) => {
+    try {
+
+        const roommates = await roommateModel.getRoomMateModel();
+
+        if (!roommates) {
+          return res.status(400).json({ message: "No hay roommates para mostrar" });
+        }
+    
+        return res.status(200).json({ roommates });
+        
+    } catch (error) {
+        console.error('No fue posible obtener a los roommates', error);
+        return res.status(500).json({ message: 'No fue posible obtener a los roommates' });
+    }
+}
+
 export default {
-    createRoomMateController
+    createRoomMateController,
+    getRoomMateController
 };
   
